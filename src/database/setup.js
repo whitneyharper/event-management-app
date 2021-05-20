@@ -5,7 +5,9 @@ const url = `mongodb+srv://wharper:Jplummer1@cluster0.nsgjo.mongodb.net/EventMan
 const connectionParams = {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true 
+    useUnifiedTopology: true,
+    ssl: true,
+    sslValidate: false 
 };
 
 module.exports = function () {
@@ -17,3 +19,4 @@ module.exports = function () {
         console.error(`Error connecting to the database. \n${err}`);
     });
 }
+
