@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 
 //CREATE SCHEMA
 const eventSchema = new mongoose.Schema({
-    id: Number,
-    title: String,
+    title: {
+        type: String,
+        required: true
+    },
     cost: {
         type: Number,
         required: true,
