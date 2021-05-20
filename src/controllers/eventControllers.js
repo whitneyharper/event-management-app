@@ -30,7 +30,7 @@ exports.fetchEvents = (req, res) => {
 }
 
 exports.fetchSingleEvent = (req, res) => {
-    Event.findOne({id: req.params.id}, (err, event) => {
+    Event.findOne({_id: req.params._id}, (err, event) => {
         if(err) {
             return res.status(500).json({message: err});
         } else if(!event) {
@@ -42,8 +42,7 @@ exports.fetchSingleEvent = (req, res) => {
 }
 
 exports.updateSingleEvent = (req, res) => {
-    Event.findByIdAndUpdate(req.params.id, {
-    id: req.body.id,
+    Event.findByIdAndUpdate(req.params._id, {
     title: req.body.title,
     cost: req.body.cost,
     category: req.body.category
@@ -75,4 +74,3 @@ exports.deleteSingleEvent = (req, res) => {
         }
     })
 }
-
