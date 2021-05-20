@@ -1,19 +1,17 @@
-//SETUP MONGOOSE
-const mongoose = require('mongoose');
-const connectionString = 'mongodb://localhost:27017/event-management'
+const mongoose = require('mongoose')
 
-module.exports = function () {
-//Connect App To Database
-mongoose.connect(connectionString, {
+const url = `mongodb+srv://wharper:Jplummer1@cluster0.nsgjo.mongodb.net/EventManagement?retryWrites=true&w=majority`;
+
+const connectionParams = {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false
-}, (err) => {
-    if(err) {
-        console.log(err)
-    } else {
-        console.log(`database connection successful`)
-    }
-})
-}
+    useCreateIndex: true,
+    useUnifiedTopology: true 
+};
 
+mongoose.connect(url,connectionParams)
+    .then( () => {
+        console.log('Connected to database ')
+    })
+    .catch( (err) => {
+        console.error(`Error connecting to the database. \n${err}`);
+    })
