@@ -7,18 +7,16 @@ const expiry = 3600;
 exports.registerNewUser = (req, res) => {
     //FETCH USER DETAILS FROM REQ.BODY
     //CHECK IF USER EXIST
-    User.findOne({username: req.body.username}, (err, existingUser) => {
+    User.findOne({email: req.body.email}, (err, existingUser) => {
         if (err) {
             return res.status(500).json({err});
         }
         if (existingUser) {
-            return res.status(400).json({message: `username already exist`});
+            return res.status(400).json({message: `user with this email already exist`});
         }
     })
     //CREATE NEW USER
     User.create({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
         username: req.body.username,
         email: req.body.email
     }, (err, newUser) => {
@@ -44,8 +42,6 @@ exports.registerNewUser = (req, res) => {
                     jwt.sign({
                         id: newUser._id,
                         username: newUser.username,
-                        firstName: newUser.firstName,
-                        lastName: newUser.lastName,
                         email: newUser.email,
                     }, secret, {expiresIn: expiry}, (err, token) => {
                         if (err) {
