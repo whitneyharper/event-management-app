@@ -1,0 +1,21 @@
+{
+  "name": "event-management-app",
+  "version": "1.0.0",
+  "description": "Event Management Application that allow user to create new event, fetch all events, fetch single event, update event, delete event and search events by category",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Whitney Harper",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.1",
+    "js": "^0.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.9"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
