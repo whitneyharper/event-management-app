@@ -2,13 +2,17 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const dbSetup = require('./database/setup');
-const allRoutes = require('./routes/eventRoutes')
+
+//REQUIRE ROUTES
+const allRoutes = require('./routes/eventRoutes');
+const authRoutes = require('./routes/authRoutes')
 
 app.use(express.json());
 
 //SETUP DATABASE
 dbSetup();
 
+app.use('/auth', authRoutes);
 app.use(allRoutes);
 
 app.listen(port, () => {
