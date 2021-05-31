@@ -1,18 +1,36 @@
 const Event = require('../models/event');
+const https = require('https');
 
 exports.createNewEvent = (req, res) => {
-    Event.create({
-        id: req.body.id,
-        title: req.body.title,
-        cost: req.body.cost,
-        category: req.body.category
-    }, (err, newEvent) =>{
-        if(err) {
-            return res.status(500).json({message: err})
-        } else {
-            return res.status(200).json({message: "new event created", newEvent})
-        }
-    })
+    const imageCategory = req.body.category; 
+    let imageUrl 
+    https.get(`https://imagegen.herokuapp.com/?category=${imageCategory}`, (response) => {
+    let data = '';
+    
+    response.on('data', (d) => {
+        data += d;
+    });
+    response.on('end', () => {
+        imageUrl = JSON.parse(data);
+        Event.create({
+            id: req.body.id,
+            title: req.body.title,
+            cost: req.body.cost,
+            category: req.body.category,
+            image: imageUrl.image
+        }, (err, newEvent) =>{
+            if(err) {
+                return res.status(500).json({message: err})
+            } else {
+                return res.status(200).json({message: "new event created", newEvent})
+            }
+        })
+    });
+    response.on('error', (e) => {
+        console.log(e);
+    });
+})
+
 }
 
 exports.fetchEvents = (req, res) => {
@@ -74,3 +92,5 @@ exports.deleteSingleEvent = (req, res) => {
         }
     })
 }
+
+
