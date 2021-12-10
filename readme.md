@@ -14,7 +14,7 @@ Features:
 * Delete an event entry from the database
 * User signup
 * User login
-* User authorization
+* User authentication
  
 ## Getting Started
 
